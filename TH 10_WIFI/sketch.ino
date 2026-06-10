@@ -12,7 +12,7 @@ String url = "https://api.openweathermap.org/data/2.5/weather?lat=21.0285&lon=10
 void setup() {
   Serial.begin(115200);
 
-  // Tiến hành kết nối Wifi
+  // Wifi
   WiFi.begin(ssid, password);
   Serial.print("ESP32 dang ket noi vao Wifi Wokwi");
   while (WiFi.status() != WL_CONNECTED) {
@@ -43,15 +43,11 @@ void loop() {
         return;
       }
 
-      // NÚT THẮT CHÍ MẠNG: Đọc cấu trúc file JSON trả về để bốc dữ liệu
-      // Gói tin của OpenWeather cấu trúc dạng: {"main": {"temp": 28.5, "humidity": 65}}
-      // Ta sẽ đi vào nhánh "main", rồi bốc thằng "temp" ra vứt vào biến số thực float
       float nhieDoHienTai = doc["main"]["temp"];
       int doAmHienTai = doc["main"]["humidity"];
       const char* moTaThoiTiet = doc["weather"][0]["description"];
       const char* tenThanhPho = doc["name"];
-
-      // --- BƯỚC 5: IN KẾT QUẢ ĐÃ LỌC LÊN SERIAL MONITOR ---
+      //----
       Serial.print("Thanh pho: ");
       Serial.println(tenThanhPho);
 
